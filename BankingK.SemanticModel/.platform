@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "BankingK"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "315eb59f-d08e-4120-9e15-abb1d15b06af"
+  }
+}

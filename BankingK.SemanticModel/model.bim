@@ -1,0 +1,940 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.129.905.0 (24.05)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"ActiveCustomer\",\"BankChurn\",\"Credit_Card\",\"CustomerInfo\",\"ExitCustomer\",\"Gender\",\"Geography\",\"KeyMeasures\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "afb54cfe-c755-4001-a207-fa7ea49c9d34",
+        "fromColumn": "GenderID",
+        "fromTable": "BankChurn",
+        "toColumn": "GenderID",
+        "toTable": "Gender"
+      },
+      {
+        "name": "7823a35e-fb16-4d22-9dbc-d5e818f27c63",
+        "fromColumn": "GeographyID",
+        "fromTable": "BankChurn",
+        "toColumn": "GeographyID",
+        "toTable": "Geography"
+      },
+      {
+        "name": "99a1d60e-0807-4150-9fb0-8e9b59d93bfb",
+        "fromColumn": "Exited",
+        "fromTable": "BankChurn",
+        "toColumn": "ExitID",
+        "toTable": "ExitCustomer"
+      },
+      {
+        "name": "da7e7a04-b574-4a58-bd65-aae24ddb45cd",
+        "fromColumn": "IsActiveMember",
+        "fromTable": "BankChurn",
+        "toColumn": "ActiveID",
+        "toTable": "ActiveCustomer"
+      },
+      {
+        "name": "2544ebc9-2de5-4bfd-8d58-91d2e253e9c4",
+        "fromColumn": "HasCrCard",
+        "fromTable": "BankChurn",
+        "toColumn": "CreditID",
+        "toTable": "Credit_Card"
+      },
+      {
+        "name": "48a76060-8158-479f-8fb1-40b8cc2979a2",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "CustomerId",
+        "fromTable": "BankChurn",
+        "toColumn": "CustomerId",
+        "toTable": "CustomerInfo"
+      },
+      {
+        "name": "e798263e-d1bb-4248-8844-81f058951390",
+        "fromColumn": "Bank DOJ",
+        "fromTable": "BankChurn",
+        "toColumn": "Date",
+        "toTable": "Date master"
+      }
+    ],
+    "roles": [
+      {
+        "name": "FranceRegion",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "bfe4c33d47f943339f6e5f304f198cb4"
+          }
+        ],
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Geography",
+            "filterExpression": "[GeographyLocation] = \"France\""
+          }
+        ]
+      },
+      {
+        "name": "GermanyRegion",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "5725684f2d7a4f759bc523283e6e593d"
+          }
+        ],
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Geography",
+            "filterExpression": "[GeographyLocation] = \"Germany\""
+          }
+        ]
+      },
+      {
+        "name": "SpainRegion",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "7f0953d09a7d42b3806338702c19d947"
+          }
+        ],
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "Geography",
+            "filterExpression": "[GeographyLocation] = \"Spain\""
+          }
+        ]
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "ActiveCustomer",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ActiveID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8a3be445-dfd2-424f-a588-dd2e98d8089c",
+            "sourceColumn": "ActiveID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ActiveCategory",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f4eb1652-1e56-4cb3-a6d5-4e0bcccf5348",
+            "sourceColumn": "ActiveCategory",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "939c6bc0-6795-4a77-8232-3a60b25262ef",
+        "partitions": [
+          {
+            "name": "ActiveCustomer",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118376&authkey=%21AAWr2FTjU57Wmcs&em=2&app=Excel \"), null, true),",
+                "    Table1_Table = Source{[Item=\"Table1\",Kind=\"Table\"]}[Data],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table1_Table,{{\"ActiveID\", Int64.Type}, {\"ActiveCategory\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "BankChurn",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "RowNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d76c93a8-cd2c-40cf-9119-f24db4f78d93",
+            "sourceColumn": "RowNumber",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CustomerId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "717f60c6-a5b3-47cf-868f-8d74757b8f6f",
+            "sourceColumn": "CustomerId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CreditScore",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "1b2d46fe-a7e9-4804-a86e-49cf4aa11449",
+            "sourceColumn": "CreditScore",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "GeographyID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "1d5c9211-2e91-445d-96e6-75ffa9aad501",
+            "sourceColumn": "GeographyID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "GenderID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "69f0fad1-368e-4f81-aff0-c7e32107fd45",
+            "sourceColumn": "GenderID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Age",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "1f1173d1-4586-40a5-9004-c1deee9bc6f8",
+            "sourceColumn": "Age",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Tenure",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9a001397-7290-43cb-95e5-5480bc215524",
+            "sourceColumn": "Tenure",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Balance",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "0dd7093a-2362-4a43-8fa2-1d79d88974da",
+            "sourceColumn": "Balance",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NumOfProducts",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "027c2612-b61f-4516-b324-769cd49de68b",
+            "sourceColumn": "NumOfProducts",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "HasCrCard",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3fc115ab-c6da-4a65-b397-19ae097915e7",
+            "sourceColumn": "HasCrCard",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IsActiveMember",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "974bddda-dae7-447d-8488-8dc6a29d2dc2",
+            "sourceColumn": "IsActiveMember",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EstimatedSalary",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e20dea9f-c433-483b-ae4a-fc69fe63d751",
+            "sourceColumn": "EstimatedSalary",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Exited",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d432d6b8-5bff-49cd-9735-296cfdd4a49b",
+            "sourceColumn": "Exited",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Bank DOJ",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "38e8200f-c3d8-4eba-b39a-86a0e8dbc77e",
+            "sourceColumn": "Bank DOJ",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CreditType",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "SWITCH(TRUE(),BankChurn[CreditScore]>=800 && BankChurn[CreditScore]<=850,\"Excelent\",",
+              "BankChurn[CreditScore]>=740 && BankChurn[CreditScore]<=799,\"Very Good\",",
+              "BankChurn[CreditScore]>=670 && BankChurn[CreditScore]<=739,\"Good\",",
+              "BankChurn[CreditScore]>=580 && BankChurn[CreditScore]<=669,\"Fair\",",
+              "BankChurn[CreditScore]>=300 && BankChurn[CreditScore]<=579,\"Poor\"",
+              ")"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "fa077205-428c-4df2-b8d3-e39aef29d3f6",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "lineageTag": "8d465e00-0f87-456c-9b10-aad11ed67468",
+        "partitions": [
+          {
+            "name": "BankChurn",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118375&authkey=%21AHky1dinHB5sZyI&em=2&app=Excel \"), null, true),",
+                "    in_Sheet = Source{[Item=\"in\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(in_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"RowNumber\", Int64.Type}, {\"CustomerId\", Int64.Type}, {\"CreditScore\", Int64.Type}, {\"GeographyID\", Int64.Type}, {\"GenderID\", Int64.Type}, {\"Age\", Int64.Type}, {\"Tenure\", Int64.Type}, {\"Balance\", type number}, {\"NumOfProducts\", Int64.Type}, {\"HasCrCard\", Int64.Type}, {\"IsActiveMember\", Int64.Type}, {\"EstimatedSalary\", type number}, {\"Exited\", Int64.Type}, {\"Bank DOJ\", type date}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Credit_Card",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "CreditID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2c01f688-65ef-4fd3-82e8-bff896555d6f",
+            "sourceColumn": "CreditID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9e1ca6dd-d944-4fdf-bee8-df100aa2e644",
+            "sourceColumn": "Category",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "e03e6f12-e613-4f9b-87f8-d644228fae2d",
+        "partitions": [
+          {
+            "name": "Credit_Card",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118374&authkey=%21AJtoyCzbp8MP-_c&em=2&app=Excel\"), null, true),",
+                "    Table1_Table = Source{[Item=\"Table1\",Kind=\"Table\"]}[Data],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table1_Table,{{\"CreditID\", Int64.Type}, {\"Category\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "CustomerInfo",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "CustomerId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "25d75f99-878f-477e-8c8b-93526eaf0e3e",
+            "sourceColumn": "CustomerId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Surname",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "75b9b6d0-4692-411d-bdf4-9801eb9935f2",
+            "sourceColumn": "Surname",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "b0174b1e-e18f-4dd0-93bd-96eedc7ce986",
+        "partitions": [
+          {
+            "name": "CustomerInfo",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118373&authkey=%21AHdXncUZyje_h40&em=2\"), null, true),",
+                "    in_Sheet = Source{[Item=\"in\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(in_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"CustomerId\", Int64.Type}, {\"Surname\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ExitCustomer",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ExitID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b8d26e83-3e94-4d68-a475-2e264be0f3a3",
+            "sourceColumn": "ExitID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ExitCategory",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5804908b-7370-414b-a939-dec5b9c0e1fd",
+            "sourceColumn": "ExitCategory",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "f77e2752-b673-4882-9bd5-7dba4b2a29fb",
+        "partitions": [
+          {
+            "name": "ExitCustomer",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118369&authkey=%21AFYm7Us81IMg-ZA&em=2&app=Excel\"), null, true),",
+                "    Table1_Table = Source{[Item=\"Table1\",Kind=\"Table\"]}[Data],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table1_Table,{{\"ExitID\", Int64.Type}, {\"ExitCategory\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gender",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "GenderID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "eeb1ed94-2c04-4e12-afec-0c9d3224963b",
+            "sourceColumn": "GenderID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "GenderCategory",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c73940ff-d126-45a1-8a5c-036bfaccc206",
+            "sourceColumn": "GenderCategory",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "debca27e-7cc3-434f-a132-788cb1167736",
+        "partitions": [
+          {
+            "name": "Gender",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118368&authkey=%21AJGprIoDq3cqg98&em=2&app=Excel\"), null, true),",
+                "    Table1_Table = Source{[Item=\"Table1\",Kind=\"Table\"]}[Data],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table1_Table,{{\"GenderID\", Int64.Type}, {\"GenderCategory\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Geography",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "GeographyID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "02dba09d-8e40-430b-8ef4-f14a111be9c7",
+            "sourceColumn": "GeographyID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "GeographyLocation",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "49159387-c0a0-4691-91ad-1170a0ede028",
+            "sourceColumn": "GeographyLocation",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "946e418d-d06a-4f08-a27c-6c2c9ca87a72",
+        "partitions": [
+          {
+            "name": "Geography",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://onedrive.live.com/download?resid=B8B24B2C5AACF7A4%2118367&authkey=%21AOhESPjcCsgUQXM&em=2&app=Excel\"), null, true),",
+                "    Table1_Table = Source{[Item=\"Table1\",Kind=\"Table\"]}[Data],",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Table1_Table,{{\"GeographyID\", Int64.Type}, {\"GeographyLocation\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date master",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "0d1b39325adb4e609728b4c52c6c4615"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Short Date",
+            "isDataTypeInferred": true,
+            "isKey": true,
+            "isNameInferred": true,
+            "lineageTag": "e0ddcd67-78fc-4ba2-8cee-652f9e7e2411",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "YEAR('Date master'[Date])",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "915795ba-b0d1-4372-a22c-5cb9c8b5472a",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "MONTH('Date master'[Date])",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "257f8bad-c17a-4dca-b714-d4a712e2a37a",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Monthname",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "FORMAT('Date master'[Date],\"mmm\")",
+            "isDataTypeInferred": true,
+            "lineageTag": "8c01980a-d836-4f3d-bbdc-bac2c15cc5b9",
+            "sortByColumn": "Month",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Dayname",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "FORMAT('Date master'[Date],\"DDDD\")",
+            "isDataTypeInferred": true,
+            "lineageTag": "083dab11-820a-4c47-be38-a25806875330",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "dataCategory": "Time",
+        "lineageTag": "f8351747-223c-424c-a162-1d7e7a67b1d6",
+        "partitions": [
+          {
+            "name": "Date master",
+            "mode": "import",
+            "source": {
+              "expression": "CALENDAR(FIRSTDATE(BankChurn[Bank DOJ]),LASTDATE(BankChurn[Bank DOJ]))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "KeyMeasures",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "changedProperties": [
+          {
+            "property": "Name"
+          }
+        ],
+        "lineageTag": "b3f44f87-e1d4-489a-97d3-a341f2a626e7",
+        "measures": [
+          {
+            "name": "Active customers",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]),ActiveCustomer[ActiveCategory]=\"Active Member\")",
+            "formatString": "0",
+            "lineageTag": "971ad953-6557-4aee-b37c-0fcf0cef01ca"
+          },
+          {
+            "name": "Total Customer",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]))",
+            "formatString": "0",
+            "lineageTag": "5b6464d9-3e95-4adb-b16d-5203601c3b73"
+          },
+          {
+            "name": "Inactive Customer",
+            "expression": "[Total Customer]-[Active customers]",
+            "formatString": "0",
+            "lineageTag": "ca613f00-123b-4eae-b791-6c143c8a5d56"
+          },
+          {
+            "name": "Creditcard Holders",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]),Credit_Card[CreditID]=1)",
+            "formatString": "0",
+            "lineageTag": "958aba47-0821-422f-b617-90c669c5f5ed"
+          },
+          {
+            "name": "NON_Creditcard Holders",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]),Credit_Card[CreditID]=0)",
+            "formatString": "0",
+            "lineageTag": "bbc11660-5a5a-442c-99ee-0b4b6b41a739"
+          },
+          {
+            "name": "Exit customer",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]),ExitCustomer[ExitCategory]=\"Exit\")",
+            "formatString": "0",
+            "lineageTag": "c724e7d8-8dd6-4c3c-9d95-60cd0dfffbcc"
+          },
+          {
+            "name": "Retain customer",
+            "expression": "CALCULATE(COUNT(BankChurn[CustomerId]),ExitCustomer[ExitCategory]=\"Retain\")",
+            "formatString": "0",
+            "lineageTag": "c00a5675-6113-4e26-ad3f-662264f37fbf"
+          },
+          {
+            "name": "Churn %",
+            "expression": [
+              "",
+              "var EC =[Exit customer]",
+              "var TC = [Total Customer]",
+              "var ChurnPER=DIVIDE(EC,TC)",
+              "return ChurnPER"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "c1cda449-1360-49a3-b41b-4f0cbbff1c84"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "KeyMeasures",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
